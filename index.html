@@ -5,10 +5,13 @@
 <div align="center">
 <img src="zero.jpg">
 <br/><br/>
-  <button onclick = "openMusic(); window.close()" align="center" class="btn btn-danger btn-lg">Music</button>
+  <button onclick = "openMusic();" align="center" class="btn btn-danger btn-lg">Music</button>
+  <button onclick = "openPhoto();" align="center" class="btn btn-danger btn-lg">Photos</button>
+  <button onclick = "openCV();" align="center" class="btn btn-danger btn-lg">CV</button>
+  <button onclick = "openDemo();" align="center" class="btn btn-danger btn-lg">AR Website</button>
   <br/><hr>
-  <button onclick = "openHira(); window.close()" align="center" class="btn btn-danger btn-lg">Hira</button>
-  <button onclick = "openKata(); window.close()" align="center" class="btn btn-danger btn-lg">Kata</button>
+  <button onclick = "openHira();" align="center" class="btn btn-danger btn-lg">Hira</button>
+  <button onclick = "openKata();" align="center" class="btn btn-danger btn-lg">Kata</button>
   <br/><hr>
   <button onclick = "openSQL();" align="center" class="btn btn-danger btn-lg">FormatSQL</button>
 
@@ -27,6 +30,15 @@ function openMusic() {
 }
 function openSQL() {
     myWindow = window.open("formatSQL.html", "", "width=480, height=670");
+}
+function openPhoto() {
+    myWindow = window.open("https://nvhphotos.herokuapp.com");
+}
+function openCV() {
+    myWindow = window.open("https://nvhuycv.herokuapp.com/");
+}
+function openDemo() {
+    myWindow = window.open("https://vuforiaunity.herokuapp.com/");
 }
 </script>
 
