@@ -4,10 +4,13 @@
 <body style="background-color:powderblue;">
 <br/><br/>
 <div align="center">
+  <button onclick = "openMusic(); window.close()" align="center" class="btn btn-danger btn-lg">Music</button>
+  <br/><hr>
   <button onclick = "openHira(); window.close()" align="center" class="btn btn-danger btn-lg">Hira</button>
   <button onclick = "openKata(); window.close()" align="center" class="btn btn-danger btn-lg">Kata</button>
   <br/><hr>
-  <button onclick = "openMusic(); window.close()" align="center" class="btn btn-danger btn-lg">Music</button>
+  <button onclick = "openSQL();" align="center" class="btn btn-danger btn-lg">FormatSQL</button>
+
 </div>
 <script>
 var myWindow;
@@ -20,6 +23,9 @@ function openKata() {
 }
 function openMusic() {
     myWindow = window.open("http://m.nhaccuatui.com/", "", "width=350, height=300");
+}
+function openSQL() {
+    myWindow = window.open("formatSQL.html", "", "width=480, height=670");
 }
 </script>
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body style="background-color:black;">
+<br/><br/>
+<div align="center">
+  <textarea id="text" rows="25" cols="60"></textarea>
+  <br/><hr>
+  <button onclick = "format();" align="center" class="btn btn-danger btn-lg">Format</button>
+</div>
+<script>
+function format() {
+    var text = document.getElementById("text").value;
+    text = text.split("SELECT\n  ").join("SELECT ");
+    text = text.split("FROM\n  ").join("  FROM ");
+    text = text.split("WHERE\n  ").join(" WHERE ");
+    text = text.split("  , ").join("      ,");
+    text = text.split("  INNER ").join(" INNER ");
+    text = text.split("  RIGHT ").join(" RIGHT ");
+    text = text.split("    AND ").join("   AND ");
+    text = text.split("    OR ").join("    OR ");
+    text = text.split("ORDER BY\n  ").join(" ORDER BY ");
+    text = text.split("GROUP BY\n  ").join(" GROUP BY ");
+    text = text.split(" <").join(" &lt;");
+    text = text.split(" >").join(" &gt;");
+    document.getElementById("text").value = text;
+}
+</script>
+</body>
+</html>
