@@ -6,6 +6,8 @@
 <div align="center">
   <button onclick = "openHira(); window.close()" align="center" class="btn btn-danger btn-lg">Hira</button>
   <button onclick = "openKata(); window.close()" align="center" class="btn btn-danger btn-lg">Kata</button>
+  <br/><hr>
+  <button onclick = "openMusic(); window.close()" align="center" class="btn btn-danger btn-lg">Music</button>
 </div>
 <script>
 var myWindow;
@@ -15,6 +17,9 @@ function openHira() {
 }
 function openKata() {
     myWindow = window.open("kata.html", "", "width=300, height=450");
+}
+function openMusic() {
+    myWindow = window.open("http://m.nhaccuatui.com/", "", "width=350, height=300");
 }
 </script>
 
