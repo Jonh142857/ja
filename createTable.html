@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body style="background-color:powderblue;">
+<br/><br/>
+<div align="center">
+  <label>Tên Bảng</label> <input id = "tableName" ></input>
+  <label>Số Cột</label> <input size="3"></input>
+  <label>Tên Cột</label> <input></input>
+</div><br/>
+<div align="center">
+  <button onclick = "create();" align="center" class="btn btn-danger btn-lg">Create</button>
+</div>
+<br/>
+<div align="center">
+  <textarea id="repository" rows="25" cols="60"></textarea>
+  <textarea id="service" rows="25" cols="60"></textarea>
+  <textarea id="serviceImpl" rows="25" cols="60"></textarea>
+  <textarea id="domain" rows="25" cols="60"></textarea>
+  <textarea id="controller" rows="25" cols="60"></textarea>
+  <textarea id="form" rows="25" cols="60"></textarea>
+  <textarea id="list" rows="25" cols="60"></textarea>
+  <br/><hr>
+</div>
+<script>
+function create() {
+    var name = document.getElementById("tableName").value;
+    var nameLower = document.getElementById("tableName").value.toLowerCase();
+    var repository = "package com.huy.repository;\r\n" + "\r\n" + "import java.util.List;\r\n" + "\r\n"
+				+ "import org.springframework.data.repository.CrudRepository;\r\n" + "\r\n" + "import com.huy.domain."
+				+ name + ";\r\n" + "\r\n" + "public interface " + name + "Repository extends CrudRepository<" + name
+				+ ", Integer> {\r\n" + "\r\n" + "    List<" + name + "> findByNameContaining(String q);\r\n" + "\r\n"
+				+ "}";
+    var service = "package com.huy.service;\r\n" + "\r\n" + "import java.util.List;\r\n" + "\r\n"
+				+ "import com.huy.domain." + name + ";\r\n" + "\r\n" + "public interface " + name + "Service {\r\n"
+				+ "\r\n" + "    Iterable<" + name + "> findAll();\r\n" + "\r\n" + "    List<" + name
+				+ "> search(String q);\r\n" + "\r\n" + "    " + name + " findOne(int id);\r\n" + "\r\n"
+				+ "    void save(" + name + " " + nameLower + ");\r\n" + "\r\n" + "    void delete(int id);\r\n"
+				+ "\r\n" + "}";
+    var serviceImpl = "package com.huy.service;\r\n" + "\r\n" + "import java.util.List;\r\n" + "\r\n"
+				+ "import org.springframework.beans.factory.annotation.Autowired;\r\n"
+				+ "import org.springframework.stereotype.Service;\r\n" + "\r\n" + "import com.huy.domain." + name
+				+ ";\r\n" + "import com.huy.repository." + name + "Repository;\r\n" + "\r\n" + "@Service\r\n"
+				+ "public class " + name + "ServiceImpl implements " + name + "Service {\r\n" + "\r\n"
+				+ "	@Autowired\r\n" + "	private " + name + "Repository " + nameLower + "Repository;\r\n" + "\r\n"
+				+ "	@Override\r\n" + "	public Iterable<" + name + "> findAll() {\r\n" + "		return " + nameLower
+				+ "Repository.findAll();\r\n" + "	}\r\n" + "\r\n" + "	@Override\r\n" + "	public List<" + name
+				+ "> search(String q) {\r\n" + "		return " + nameLower + "Repository.findByNameContaining(q);\r\n"
+				+ "	}\r\n" + "\r\n" + "	@Override\r\n" + "	public " + name + " findOne(int id) {\r\n" + "		return "
+				+ nameLower + "Repository.findOne(id);\r\n" + "	}\r\n" + "\r\n" + "	@Override\r\n"
+				+ "	public void save(" + name + " " + nameLower + ") {\r\n" + "		" + nameLower + "Repository.save("
+				+ nameLower + ");\r\n" + "	}\r\n" + "\r\n" + "	@Override\r\n" + "	public void delete(int id) {\r\n"
+				+ "		" + nameLower + "Repository.delete(id);\r\n" + "	}\r\n" + "}";
+    var domain = "package com.huy.domain;\r\n" + "\r\n" + "import java.io.Serializable;\r\n" + "\r\n"
+				+ "import javax.persistence.Column;\r\n" + "import javax.persistence.Entity;\r\n"
+				+ "import javax.persistence.GeneratedValue;\r\n" + "import javax.persistence.GenerationType;\r\n"
+				+ "import javax.persistence.Id;\r\n" + "import javax.persistence.Table;\r\n" + "\r\n"
+				+ "import org.hibernate.validator.constraints.NotEmpty;\r\n" + "\r\n" + "@Entity\r\n"
+				+ "@Table(name = \"" + nameLower + "\")\r\n" + "public class " + name + " implements Serializable {\r\n"
+				+ "\r\n" + "	private static final long serialVersionUID = 1L;\r\n" + "\r\n" + "	@Id\r\n"
+				+ "	@GeneratedValue(strategy = GenerationType.AUTO)\r\n"
+				+ "	@Column(name = \"id\", nullable = false)\r\n" + "	private int id;\r\n" + "\r\n"
+				+ "	@NotEmpty\r\n" + "	@Column(name = \"name\", nullable = false)\r\n" + "	private String name;\r\n"
+				+ "\r\n" + "	@Column(name = \"about\")\r\n" + "	private String about;\r\n" + "\r\n" + "	public "
+				+ name + "() {\r\n" + "		super();\r\n" + "	}\r\n" + "\r\n" + "	public " + name
+				+ "(int id, String name, String about) {\r\n" + "		super();\r\n" + "		this.id = id;\r\n"
+				+ "		this.name = name;\r\n" + "		this.about = about;\r\n" + "	}\r\n" + "\r\n"
+				+ "	public int getId() {\r\n" + "		return id;\r\n" + "	}\r\n" + "\r\n"
+				+ "	public void setId(int id) {\r\n" + "		this.id = id;\r\n" + "	}\r\n" + "\r\n"
+				+ "	public String getName() {\r\n" + "		return name;\r\n" + "	}\r\n" + "\r\n"
+				+ "	public void setName(String name) {\r\n" + "		this.name = name;\r\n" + "	}\r\n" + "\r\n"
+				+ "	public String getAbout() {\r\n" + "		return about;\r\n" + "	}\r\n" + "\r\n"
+				+ "	public void setAbout(String about) {\r\n" + "		this.about = about;\r\n" + "	}\r\n" + "\r\n"
+				+ "	public static long getSerialversionuid() {\r\n" + "		return serialVersionUID;\r\n" + "	}\r\n"
+				+ "\r\n" + "}";
+    var controller = "package com.huy.controller;\r\n" + "\r\n" + "import javax.validation.Valid;\r\n" + "\r\n"
+				+ "import org.springframework.beans.factory.annotation.Autowired;\r\n"
+				+ "import org.springframework.stereotype.Controller;\r\n" + "import org.springframework.ui.Model;\r\n"
+				+ "import org.springframework.validation.BindingResult;\r\n"
+				+ "import org.springframework.web.bind.annotation.GetMapping;\r\n"
+				+ "import org.springframework.web.bind.annotation.PathVariable;\r\n"
+				+ "import org.springframework.web.bind.annotation.PostMapping;\r\n"
+				+ "import org.springframework.web.bind.annotation.RequestParam;\r\n"
+				+ "import org.springframework.web.servlet.mvc.support.RedirectAttributes;\r\n" + "\r\n"
+				+ "import com.huy.domain." + name + ";\r\n" + "import com.huy.service." + name + "Service;\r\n" + "\r\n"
+				+ "@Controller\r\n" + "public class " + name + "Controller {\r\n" + "	\r\n" + "	@Autowired\r\n"
+				+ "	private " + name + "Service " + nameLower + "Service;\r\n" + "\r\n" + "    @GetMapping(\"/"
+				+ nameLower + "\")\r\n" + "    public String index(Model model) {\r\n" + "        model.addAttribute(\""
+				+ nameLower + "s\", " + nameLower + "Service.findAll());\r\n" + "        return \"" + nameLower
+				+ "_list\";\r\n" + "    }\r\n" + "    \r\n" + "    @GetMapping(\"/" + nameLower + "/create\")\r\n"
+				+ "    public String create(Model model) {\r\n" + "        model.addAttribute(\"" + nameLower
+				+ "\", new " + name + "());\r\n" + "        return \"" + nameLower + "_form\";\r\n" + "    }\r\n"
+				+ "    \r\n" + "    @GetMapping(\"/" + nameLower + "/{id}/edit\")\r\n"
+				+ "    public String edit(@PathVariable int id, Model model) {\r\n" + "        model.addAttribute(\""
+				+ nameLower + "\", " + nameLower + "Service.findOne(id));\r\n" + "        return \"" + nameLower
+				+ "_form\";\r\n" + "    }\r\n" + "    \r\n" + "    @PostMapping(\"/" + nameLower + "/save\")\r\n"
+				+ "    public String save(@Valid " + name + " " + nameLower
+				+ ", BindingResult result, RedirectAttributes redirect) {\r\n" + "        if (result.hasErrors()) {\r\n"
+				+ "            return \"" + nameLower + "_form\";\r\n" + "        }\r\n" + "        " + nameLower
+				+ "Service.save(" + nameLower + ");\r\n"
+				+ "        redirect.addFlashAttribute(\"success\", \"Saved Data\");\r\n" + "        return \"redirect:/"
+				+ nameLower + "\";\r\n" + "    }\r\n" + "    \r\n" + "    @GetMapping(\"/" + nameLower
+				+ "/{id}/delete\")\r\n"
+				+ "    public String delete(@PathVariable int id, RedirectAttributes redirect) {\r\n" + "    	"
+				+ nameLower + "Service.delete(id);\r\n"
+				+ "        redirect.addFlashAttribute(\"success\", \"Deleted Data\");\r\n"
+				+ "        return \"redirect:/" + nameLower + "\";\r\n" + "     }\r\n" + "    \r\n"
+				+ "    @GetMapping(\"/" + nameLower + "/search\")\r\n"
+				+ "    public String search(@RequestParam(\"q\") String q, Model model) {\r\n"
+				+ "        if (q.equals(\"\")) {\r\n" + "            return \"redirect:/" + nameLower + "\";\r\n"
+				+ "        }\r\n" + "        \r\n" + "        model.addAttribute(\"" + nameLower + "s\", " + nameLower
+				+ "Service.search(q));\r\n" + "        return \"" + nameLower + "_list\";\r\n" + "    }\r\n" + "\r\n"
+				+ "}\r\n" + "";
+    var form = "<!DOCTYPE html>\r\n" + "<html xmlns:th=\"http://www.thymeleaf.org\">\r\n"
+				+ "<head th:replace=\"layout :: head\"></head>\r\n" + "<body>\r\n"
+				+ "    <nav th:replace=\"layout :: header\"></nav>\r\n" + "	<br/><br/><br/><br/><br/>\r\n"
+				+ "	<h1>Tiêu đề</h1>\r\n" + "    <div class=\"container main-content form\">\r\n"
+				+ "        <div class=\"row\">\r\n" + "          <form action=\"#\" th:action=\"@{/" + nameLower
+				+ "/save}\" th:object=\"${" + nameLower + "}\"\r\n"
+				+ "		    method=\"POST\" novalidate=\"novalidate\">\r\n"
+				+ "		    <input type=\"hidden\" th:field=\"*{id}\" />\r\n"
+				+ "		    <div class=\"form-group\">\r\n"
+				+ "		        <label class=\"control-label col-sm-2 \">Name</label> \r\n"
+				+ "		        <div class=\"col-sm-10\">\r\n"
+				+ "		        <input type=\"text\" class=\"form-control\"\r\n"
+				+ "		            th:field=\"*{name}\" th:errorclass=\"field-error\" placeholder=\"Input name\" /> \r\n"
+				+ "		        <em th:if=\"${#fields.hasErrors('name')}\" th:errors=\"*{name}\"></em>\r\n"
+				+ "		        <br/>\r\n" + "		        </div>\r\n" + "		    </div>\r\n"
+				+ "		    <div class=\"form-group\">\r\n"
+				+ "		        <label class=\"control-label col-sm-2 \">About</label> \r\n"
+				+ "		        <div class=\"col-sm-10\">\r\n"
+				+ "		        <input type=\"text\" class=\"form-control\" th:field=\"*{about}\" placeholder=\"Input about\" />\r\n"
+				+ "		         <br/>\r\n" + "		        </div>\r\n" + "		    </div>\r\n"
+				+ "		    <button type=\"submit\" class=\"btn btn-primary btn-lg\">Save</button>\r\n"
+				+ "		</form>\r\n" + "        </div>\r\n" + "    </div>\r\n"
+				+ "    <footer th:replace=\"layout :: footer\"></footer>\r\n" + "</body>\r\n" + "</html>";
+    var list = "<!DOCTYPE html>\r\n" + "<html xmlns:th=\"http://www.thymeleaf.org\">\r\n"
+				+ "<head th:replace=\"layout :: head\"></head>\r\n" + "<body>\r\n"
+				+ "    <nav th:replace=\"layout :: header\"></nav>\r\n" + "	<br/><br/><br/><br/><br/>\r\n"
+				+ "    <div class=\"container main-content list\">\r\n"
+				+ "    	<div th:if=\"${success}\" class=\"row alert alert-success alert-dismissible\">\r\n"
+				+ "	        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n"
+				+ "	        <span th:text=\"${success}\"></span>\r\n" + "	    </div>\r\n" + "    	\r\n"
+				+ "    	<th:block th:if=\"${#lists.isEmpty(" + nameLower + "s)}\">\r\n"
+				+ "		    <h3>404 Error</h3>\r\n" + "		    <div class=\"row\">\r\n"
+				+ "				<a th:href=\"@{/" + nameLower + "/create}\"\r\n"
+				+ "					class=\"btn btn-primary pull-left\"> <span\r\n"
+				+ "					class=\"glyphicon glyphicon-plus\"></span> Add new object\r\n"
+				+ "				</a>\r\n" + "			</div>\r\n" + "		</th:block>\r\n" + "		\r\n"
+				+ "        <th:block th:unless=\"${#lists.isEmpty(" + nameLower + "s)}\">\r\n"
+				+ "            <div class=\"row\">\r\n" + "                <a th:href=\"@{/" + nameLower
+				+ "/create}\" class=\"btn btn-primary pull-left\">\r\n"
+				+ "                	<span class=\"glyphicon glyphicon-plus\"></span> Add new object\r\n"
+				+ "               	</a>\r\n"
+				+ "                <form class=\"form-inline pull-right\" action=\"#\" th:action=\"@{/" + nameLower
+				+ "/search}\" method=\"GET\">\r\n" + "                    <div class=\"form-group\">\r\n"
+				+ "                        <input type=\"text\" class=\"form-control\" name=\"q\" \r\n"
+				+ "                            placeholder=\"Input object name\" />\r\n"
+				+ "                    </div>\r\n"
+				+ "                    <button type=\"submit\" class=\"btn btn-primary\">Search</button>\r\n"
+				+ "                </form>\r\n" + "            </div>\r\n" + "            <br/>\r\n"
+				+ "            <div class=\"row\">\r\n"
+				+ "                <table class=\"table table-bordered table-hover black-text\">\r\n"
+				+ "                    <thead>\r\n" + "                        <tr bgcolor=\"#CCCCCC\">\r\n"
+				+ "                            <th>STT</th>\r\n" + "                            <th>Name</th>\r\n"
+				+ "                            <th>About</th>\r\n" + "                            <th>Edit</th>\r\n"
+				+ "                            <th>Delete</th>\r\n" + "                        </tr>\r\n"
+				+ "                    </thead>\r\n" + "                    <tbody>\r\n"
+				+ "                        <tr th:each=\"" + nameLower + ",iterStat : ${" + nameLower + "s}\">\r\n"
+				+ "                            <td th:text=\"${iterStat.count}\"></td>\r\n"
+				+ "                            <td th:text=\"${" + nameLower + ".name}\"></td>\r\n"
+				+ "                            <td th:text=\"${" + nameLower + ".about}\"></td>\r\n"
+				+ "                            <td><a th:href=\"@{/" + nameLower + "/{id}/edit(id=${" + nameLower
+				+ ".id})}\"><span class=\"glyphicon glyphicon-pencil\"></span></a></td>\r\n"
+				+ "                            <td><a th:href=\"@{/" + nameLower + "/{id}/delete(id=${" + nameLower
+				+ ".id})}\"><span class=\"glyphicon glyphicon-trash\"></span></a></td>\r\n"
+				+ "                        </tr>\r\n" + "                    </tbody>\r\n"
+				+ "                </table>\r\n" + "            </div>\r\n" + "        </th:block>\r\n"
+				+ "    </div>\r\n" + "    <footer th:replace=\"layout :: footer\"></footer>\r\n" + "</body>\r\n"
+				+ "</html>";
+    document.getElementById("repository").value = repository;
+    document.getElementById("service").value = service;
+    document.getElementById("serviceImpl").value = serviceImpl;
+    document.getElementById("domain").value = domain;
+    document.getElementById("controller").value = controller;
+    document.getElementById("form").value = form;
+    document.getElementById("list").value = list;
+}
+</script>
+</body>
+</html>
