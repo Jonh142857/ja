@@ -7,6 +7,7 @@
 <img src="zero.jpg">
 <br/><br/>
   <button onclick = "openFb();" align="center" class="btn btn-primary btn-lg">Facebook</button>
+  <button onclick = "openChat();" align="center" class="btn btn-danger btn-lg">ChatWork</button>
   <button onclick = "openMusic();" align="center" class="btn btn-danger btn-lg">Music</button>
   <button onclick = "openPhoto();" align="center" class="btn btn-danger btn-lg">Photos</button>
   <button onclick = "openCV();" align="center" class="btn btn-danger btn-lg">CV</button>
@@ -30,8 +31,12 @@ function openKata() {
 }
 function openMusic() {
     myWindow = window.open("http://m.nhaccuatui.com/", "", "width=350, height=300");
-}function openFb() {
+}
+function openFb() {
     myWindow = window.open("http://m.facebook.com/messages/read/?tid=cid.c.100009135930251%3A100023633589931", "", "width=300, height=300");
+}
+function openChat() {
+    myWindow = window.open("https://www.chatwork.com/#!rid59385706", "", "width=580, height=550");
 }
 function openSQL() {
     myWindow = window.open("formatSQL.html", "", "width=480, height=670");
