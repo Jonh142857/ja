@@ -18,6 +18,7 @@
   <br/><hr>
   <button onclick = "openSQL();" align="center" class="btn btn-danger btn-lg">FormatSQL</button>
   <button onclick = "openTable();" align="center" class="btn btn-danger btn-lg">Create Table</button>
+  <button onclick = "openIpAddress();" align="center" class="btn btn-danger btn-lg">Find IP Address</button>
 
 </div>
 <script>
@@ -52,6 +53,9 @@ function openDemo() {
 }
 function openTable() {
     myWindow = window.open("createTable.html");
+}
+function openIpAddress() {
+    myWindow = window.open("findAddress.html", "", "width=300, height=100");
 }
 </script>
 

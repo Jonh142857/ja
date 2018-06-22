@@ -1,0 +1,23 @@
+<html>
+   <head>
+      <title>The jQuery Example</title>
+      <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script type="text/javascript" language="javascript">
+         $(document).ready(function() {
+            $("#find").click(function(event){
+              var link = "http://freegeoip.net/json/" + $('#ip').val();
+               $.getJSON(link, function(jd) {
+                  $('#result').val(jd.country_name + " - " +jd.region_name)
+               });
+            });
+         });
+      </script>
+   </head>
+   <body>
+      <input id="ip"></input>
+      <input type="button" id="find" value="Load Data" />
+      <br/><hr>
+      <input id="result"></input>
+
+   </body>
+</html>
