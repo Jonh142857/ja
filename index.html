@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <title>Zero Project</title>
+  <title id="date12"></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<body style="background-color:powderblue;">
+   <link href="style.css" rel="stylesheet">
+<body style="background-color:powderblue;" onload ="getWeekDay()">
 <div align="center">
 <img src="zero.jpg">
 <br/><br/>
+  <h3 id = "date"><h3>
   <button onclick = "openFb();" align="center" class="btn btn-primary btn-lg">Facebook</button>
   <button onclick = "openChat();" align="center" class="btn btn-danger btn-lg">ChatWork</button>
   <button onclick = "openMusic();" align="center" class="btn btn-danger btn-lg">Music</button>
@@ -19,11 +21,28 @@
   <button onclick = "openSQL();" align="center" class="btn btn-danger btn-lg">FormatSQL</button>
   <button onclick = "openTable();" align="center" class="btn btn-danger btn-lg">Create Table</button>
   <button onclick = "openIpAddress();" align="center" class="btn btn-danger btn-lg">Find IP Address</button>
-
 </div>
+</body>
 <script>
 var myWindow;
 
+function getWeekDay() {
+    var d = new Date();
+	var month = d.getUTCMonth() + 1;
+	var day = d.getUTCDate();
+	var year = d.getUTCFullYear();
+    var weekday = new Array(7);
+    weekday[0] = "Chủ nhật";
+    weekday[1] = "Thứ 2";
+    weekday[2] = "Thứ 3";
+    weekday[3] = "Thứ 4";
+    weekday[4] = "Thứ 5";
+    weekday[5] = "Thứ 6";
+    weekday[6] = "Thứ 7";
+
+    var n = weekday[d.getDay()];
+    document.getElementById("date").innerHTML = n + ": " + day + "/" + month;
+}
 function openHira() {
     myWindow = window.open("hira.html", "", "width=300, height=450");
 }
@@ -31,7 +50,7 @@ function openKata() {
     myWindow = window.open("kata.html", "", "width=300, height=450");
 }
 function openMusic() {
-    myWindow = window.open("http://m.nhaccuatui.com/", "", "width=350, height=300");
+    myWindow = window.open("http://mp3.zing.vn/", "", "width=350, height=300");
 }
 function openFb() {
     myWindow = window.open("http://m.facebook.com/messages/read/?tid=cid.c.100009135930251%3A100023633589931", "", "width=300, height=300");
@@ -58,6 +77,4 @@ function openIpAddress() {
     myWindow = window.open("findAddress.html", "", "width=300, height=100");
 }
 </script>
-
-</body>
 </html>
