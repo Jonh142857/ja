@@ -27,6 +27,9 @@ function create() {
     var address = document.getElementById("address").value;
     var port = document.getElementById("port").value;
     var link = "http://localhost:" + port + address + "/" + func + "/" + screen + ".action?win=1";
+    if(screen == ""){
+        link = "http://localhost:" + port + address;
+    }
     myWindow = window.open(link, "", "width=600, height=600");
 }
 </script>
