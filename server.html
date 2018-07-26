@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body style="background-color:powderblue;">
+<br/><br/>
+<div align="center">
+  <label>Mã màn hình:&ensp;</label> <input id = "screeenName" ></input><br/><br/>
+  <label>Address:&ensp;&ensp;&ensp;&ensp;&ensp;</label> <input id = "address" ></input><br/><br/>
+  <label>Port:&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;</label> <input id = "port" value = "8080"></input>
+</div><br/><br/><br/>
+<div align="center">
+  <button onclick = "create();" align="center" class="btn btn-danger btn-lg">GoTo Server</button>
+</div>
+<br/>
+<script>
+function create() {
+    var screen = document.getElementById("screeenName").value.toLowerCase();
+    var func = screen.slice(1, 9);
+    var address = document.getElementById("address").value;
+    var port = document.getElementById("port").value;
+    var link = "http://localhost:" + port + address + "/" + func + "/" + screen + ".action?win=1";
+    myWindow = window.open(link, "", "width=600, height=600");
+}
+</script>
+</body>
+</html>
