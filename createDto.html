@@ -24,9 +24,11 @@
 function create() {
     var functionID = document.getElementById("functionID").value.toLowerCase();
     var functionName = document.getElementById("functionName").value;
-    var selectID = document.getElementById("selectID").value;
+    var selectID = document.getElementById("selectID").value.toLowerCase();
     var user = document.getElementById("user").value;
     var date = document.getElementById("date").value;
+    var functionID2 = functionID.charAt(0).toUpperCase() + functionID.slice(1);
+    var selectID2 = selectID.charAt(0).toUpperCase() + selectID.slice(1);
     var param = "package jp.co.stnet.apps.ftth.dto."+functionID+";"
                      +"\r\n"+""
                      +"\r\n"+"import jp.co.stnet.apps.ftth.core.dto.ZzBaseDto;"
@@ -49,7 +51,7 @@ function create() {
                      +"\r\n"+" * </tr>"
                      +"\r\n"+" * </table>"
                      +"\r\n"+" */"
-                     +"\r\n"+"public class Faab3013Select101ParamDto extends ZzBaseDto {"
+                     +"\r\n"+"public class "+functionID2+selectID2+"ParamDto extends ZzBaseDto {"
                      +"\r\n"+""
                      +"\r\n"+"	/**"
                      +"\r\n"+"	 * デフォルトシリアルバージョンID"
@@ -79,7 +81,7 @@ function create() {
                      +"\r\n"+" * </tr>"
                      +"\r\n"+" * </table>"
                      +"\r\n"+" */"
-                     +"\r\n"+"public class Faab3013Select101ResultDto extends ZzBaseDto {"
+                     +"\r\n"+"public class "+functionID2+selectID2+"ResultDto extends ZzBaseDto {"
                      +"\r\n"+""
                      +"\r\n"+"	/**"
                      +"\r\n"+"	 * デフォルトシリアルバージョンID"
