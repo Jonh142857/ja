@@ -13,6 +13,10 @@
 </div><br/>
 <div align="center">
   <button onclick = "create();" class="btn btn-danger btn-lg">Create</button>
+  &emsp;<a href="" id="paramDownload" class="btn btn-danger btn-lg">Param</a>
+  &emsp;<a href="" id="resultDownload" class="btn btn-danger btn-lg">Result</a>
+  &emsp;<a href="" id="javaDaoDownload" class="btn btn-danger btn-lg">Dao Java</a>
+  &emsp;<a href="" id="xmlDaoDownload" class="btn btn-danger btn-lg">Dao XML</a>
 </div>
 <br/>
 <div align="center">
@@ -132,6 +136,26 @@ function create() {
     document.getElementById("result").value = result;
     document.getElementById("javaDao").value = javaDao;
     document.getElementById("xmlDao").value = xmlDao;
+
+    var paramDownload = document.getElementById("paramDownload");
+    var paramFile = new Blob([param], {type: "text/plain"});
+    paramDownload.href = URL.createObjectURL(paramFile);
+    paramDownload.download = "ParamDto.java";
+
+    var resultDownload = document.getElementById("resultDownload");
+    var resultFile = new Blob([result], {type: "text/plain"});
+    resultDownload.href = URL.createObjectURL(paramFile);
+    resultDownload.download = "ResultDto.java";
+
+    var javaDaoDownload = document.getElementById("javaDaoDownload");
+    var javaDaoFile = new Blob([javaDao], {type: "text/plain"});
+    javaDaoDownload.href = URL.createObjectURL(paramFile);
+    javaDaoDownload.download = "Dao.java";
+
+    var xmlDaoDownload = document.getElementById("xmlDaoDownload");
+    var xmlDaoFile = new Blob([xmlDao], {type: "text/plain"});
+    xmlDaoDownload.href = URL.createObjectURL(paramFile);
+    xmlDaoDownload.download = "Dao.xml";
 }
 </script>
 </body>
