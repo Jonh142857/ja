@@ -4,12 +4,12 @@
 <body style="background-color:powderblue;">
 <br/><br/>
 <div align="center">
-  <label>Mã chức năng</label> <input id = "functionID" ></input>
-  <label>Tên chức năng</label> <input id = "functionName" ></input>
-  <label>SelectID</label> <input id = "selectID" ></input>
+  <input id = "functionID" placeholder="Mã chức năng"></input>
+  <input id = "functionName" placeholder="Tên chức năng"></input>
+  <input id = "selectID" placeholder="SelectID"></input>
   <br/><br/>
-  <label>Người tạo</label> <input id = "user" ></input>
-  <label>Ngày comment</label> <input id = "date" ></input>
+  <input id = "user" placeholder="Người tạo"></input>
+  <input type="date" id = "date" placeholder="Ngày comment"></input>
 </div><br/>
 <div align="center">
   <button onclick = "create();" class="btn btn-danger btn-lg">Create</button>
@@ -17,7 +17,9 @@
 <br/>
 <div align="center">
   <textarea id="param" rows="25" cols="80"></textarea>
-  <textarea id="result" rows="25" cols="80"></textarea>
+  <textarea id="result" rows="25" cols="80"></textarea> <br/>
+  <textarea id="javaDao" rows="25" cols="80"></textarea>
+  <textarea id="xmlDao" rows="25" cols="80"></textarea>
   <br/><hr>
 </div>
 <script>
@@ -26,7 +28,8 @@ function create() {
     var functionName = document.getElementById("functionName").value;
     var selectID = document.getElementById("selectID").value.toLowerCase();
     var user = document.getElementById("user").value;
-    var date = document.getElementById("date").value;
+    var date = document.getElementById("date").value.replace('-', '/');
+        date = date.replace('-', '/');
     var functionID2 = functionID.charAt(0).toUpperCase() + functionID.slice(1);
     var selectID2 = selectID.charAt(0).toUpperCase() + selectID.slice(1);
     var param = "package jp.co.stnet.apps.ftth.dto."+functionID+";"
@@ -36,7 +39,7 @@ function create() {
                      +"\r\n"+"/**"
                      +"\r\n"+" * 「"+functionName+"」"+selectID+"パラメータ  Dtoクラスです。"
                      +"\r\n"+" *"
-                     +"\r\n"+' * @version <table border="1">'
+                     +"\r\n"+" * @version <table border=\"1\">"
                      +"\r\n"+" * <tr>"
                      +"\r\n"+" * <th>Version</th>"
                      +"\r\n"+" * <th>更新日</th>"
@@ -66,7 +69,7 @@ function create() {
                      +"\r\n"+"/**"
                      +"\r\n"+" * 「"+functionName+"」"+selectID+"の戻り値 Dtoクラスです。"
                      +"\r\n"+" *"
-                     +"\r\n"+' * @version <table border="1">'
+                     +"\r\n"+" * @version <table border=\"1\">"
                      +"\r\n"+" * <tr>"
                      +"\r\n"+" * <th>Version</th>"
                      +"\r\n"+" * <th>更新日</th>"
@@ -89,8 +92,46 @@ function create() {
                      +"\r\n"+"	private static final long serialVersionUID = 1L;"
                      +"\r\n"+"	"
                      +"\r\n"+"}"
+    var javaDao = "package jp.co.stnet.apps.ftth.dao."+functionID+";"
+                     +"\r\n"+""
+                     +"\r\n"+""
+                     +"\r\n"+"/**"
+                     +"\r\n"+" * 「"+functionName+"」の Daoクラスです。"
+                     +"\r\n"+" *"
+                     +"\r\n"+" * @version <table border=\"1\">"
+                     +"\r\n"+" *<tr>"
+                     +"\r\n"+" *<th>Version</th>"
+                     +"\r\n"+" *<th>更新日</th>"
+                     +"\r\n"+" *<th>更新者</th>"
+                     +"\r\n"+" *<th>内容</th>"
+                     +"\r\n"+" *</tr>"
+                     +"\r\n"+" *<tr>"
+                     +"\r\n"+" *<td>1.0</td>"
+                     +"\r\n"+" *<td>"+date+"</td>"
+                     +"\r\n"+" *<td>"+user+"</td>"
+                     +"\r\n"+" *<td>新規作成</td>"
+                     +"\r\n"+" *</tr>"
+                     +"\r\n"+" *</table>"
+                     +"\r\n"+" */"
+                     +"\r\n"+"public interface "+functionID2+"Dao {"
+                     +"\r\n"+"	"
+                     +"\r\n"+"}"
+    var xmlDao = "<?xml version=\"1.0\" encoding=\'UTF-8\'?>"
+                     +"\r\n"+"<!DOCTYPE mapper PUBLIC \'-//mybatis.org//DTD Mapper 3.0//EN\' \'http://mybatis.org/dtd/mybatis-3-mapper.dtd\'>"
+                     +"\r\n"+"<!--"
+                     +"\r\n"+"    「分類金額マスタメンテナンス機能」のSQL定義ファイルです。"
+                     +"\r\n"+""
+                     +"\r\n"+"    Version     更新日      更新者      内容"
+                     +"\r\n"+"    1.0         2018/09/01  IVS NVHUY   新規作成"
+                     +"\r\n"+"-->"
+                     +"\r\n"+"<mapper namespace=\'jp.co.stnet.apps.ftth.dao.faab3013.Faab3013Dao\'>"
+                     +"\r\n"+""
+                     +"\r\n"+"</mapper>"
+
     document.getElementById("param").value = param;
     document.getElementById("result").value = result;
+    document.getElementById("javaDao").value = javaDao;
+    document.getElementById("xmlDao").value = xmlDao;
 }
 </script>
 </body>
