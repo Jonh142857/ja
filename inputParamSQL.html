@@ -8,7 +8,7 @@
 </div>
 <hr><br/>
 <div align="center">
-  <input id="sql" placeholder="Câu SQL"></input>
+  <textarea id="sql" rows="2" cols="48" placeholder="Câu SQL"></textarea>
   <br/><br/><input id="param1" placeholder="Param 1"></input> <input id="param2" placeholder="Param 2"></input>
   <br/><br/><input id="param3" placeholder="Param 3"></input> <input id="param4" placeholder="Param 4"></input>
   <br/><br/><input id="param5" placeholder="Param 5"></input> <input id="param6" placeholder="Param 6"></input>
@@ -33,7 +33,7 @@ function input() {
 	var sql = document.getElementById("sql").value;
 	var i = 0;
 	while (i < paramList.length) {
-		sql = sql.replace("?",paramList[i]);
+		sql = sql.replace("?","\""+paramList[i]+"\"");
 		i++;
 	}
 	document.getElementById("result").value = sql;
