@@ -36,6 +36,7 @@ function input() {
 		sql = sql.replace("?","\'"+paramList[i]+"\'");
 		i++;
 	}
+	sql =  sql.substring(0,sql.indexOf("<== parameters"));
 	document.getElementById("result").value = sql;
 }
 </script>
