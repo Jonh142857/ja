@@ -16,7 +16,7 @@
   <br/><br/><input id="param9" placeholder="Param 9"></input> <input id="param10" placeholder="Param 10"></input>
   <br/><br/><img src="sqlTutorial.png">
   <br/><hr>
-  <textarea id="result" rows="8" cols="48" placeholder="SQL Đã Thêm Param"></textarea>
+  <textarea id="result" rows="8" cols="48"></textarea>
 </div>
 <script>
 function input() {
@@ -37,6 +37,7 @@ function input() {
 		sql = sql.replace("?","\'"+paramList[i]+"\'");
 		i++;
 	}
+	if(sql.indexOf("<== parameters") != -1)
 	sql =  sql.substring(0,sql.indexOf("<== parameters"));
 	document.getElementById("result").value = sql;
 }
