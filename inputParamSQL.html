@@ -33,7 +33,7 @@ function input() {
 	var sql = document.getElementById("sql").value;
 	var i = 0;
 	while (i < paramList.length) {
-		sql = sql.replace("?","\""+paramList[i]+"\"");
+		sql = sql.replace("?","\'"+paramList[i]+"\'");
 		i++;
 	}
 	document.getElementById("result").value = sql;
