@@ -20,6 +20,7 @@
   <button onclick = "openKata();" align="center" class="btn btn-danger btn-lg">Kata</button>
   <button onclick = "openDto();" align="center" class="btn btn-danger btn-lg">Create DTO, DAO</button>
   <br/><hr>
+  <button onclick = "openAddParram();" align="center" class="btn btn-success btn-lg">Add Param</button>
   <button onclick = "openSQL();" align="center" class="btn btn-danger btn-lg">FormatSQL</button>
   <button onclick = "openTable();" align="center" class="btn btn-danger btn-lg">Create Table</button>
   <button onclick = "openIpAddress();" align="center" class="btn btn-danger btn-lg">Find IP Address</button>
@@ -45,6 +46,9 @@ function getWeekDay() {
 
     var n = weekday[d.getDay()];
     document.getElementById("date").innerHTML = n + ": " + day + "/" + month;
+}
+function openAddParram() {
+    myWindow = window.open("inputParamSQL.html", "", "width=480, height=670");
 }
 function openHira() {
     myWindow = window.open("hira.html", "", "width=300, height=450");

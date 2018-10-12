@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body style="">
+<br/><br/>
+<div align="center">
+  <button onclick = "input();" align="center" class="btn btn-danger btn-lg">Input Param</button>
+</div>
+<hr><br/>
+<div align="center">
+  <input id="sql" placeholder="Câu SQL"></input>
+  <br/><br/><input id="param1" placeholder="Param 1"></input> <input id="param2" placeholder="Param 2"></input>
+  <br/><br/><input id="param3" placeholder="Param 3"></input> <input id="param4" placeholder="Param 4"></input>
+  <br/><br/><input id="param5" placeholder="Param 5"></input> <input id="param6" placeholder="Param 6"></input>
+  <br/><br/><input id="param7" placeholder="Param 7"></input> <input id="param8" placeholder="Param 8"></input>
+  <br/><br/><input id="param9" placeholder="Param 9"></input> <input id="param10" placeholder="Param 10"></input>
+  <br/><hr>
+  <textarea id="result" rows="8" cols="48"></textarea>
+</div>
+<script>
+function input() {
+    var param1 = document.getElementById("param1").value;
+    var param2 = document.getElementById("param2").value;
+    var param3 = document.getElementById("param3").value;
+    var param4 = document.getElementById("param4").value;
+    var param5 = document.getElementById("param5").value;
+    var param6 = document.getElementById("param6").value;
+    var param7 = document.getElementById("param7").value;
+    var param8 = document.getElementById("param8").value;
+    var param9 = document.getElementById("param9").value;
+    var param10 = document.getElementById("param10").value;
+	var paramList = new Array(param1,param2,param3,param4,param5,param6,param7,param8,param9,param10);
+	var sql = document.getElementById("sql").value;
+	var i = 0;
+	while (i < paramList.length) {
+		sql = sql.replace("?",paramList[i]);
+		i++;
+	}
+	document.getElementById("result").value = sql;
+}
+</script>
+</body>
+</html>
