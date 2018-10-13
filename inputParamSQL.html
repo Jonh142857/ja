@@ -9,11 +9,11 @@
 <hr><br/>
 <div align="center">
   <textarea id="sql" rows="2" cols="48" placeholder="Câu SQL"></textarea>
-  <br/><br/><input id="param1" placeholder="Param 1"></input> <input id="param2" placeholder="Param 2"></input>
-  <br/><br/><input id="param3" placeholder="Param 3"></input> <input id="param4" placeholder="Param 4"></input>
-  <br/><br/><input id="param5" placeholder="Param 5"></input> <input id="param6" placeholder="Param 6"></input>
-  <br/><br/><input id="param7" placeholder="Param 7"></input> <input id="param8" placeholder="Param 8"></input>
-  <br/><br/><input id="param9" placeholder="Param 9"></input> <input id="param10" placeholder="Param 10"></input>
+  <br/><br/><input id="param1" placeholder="Param 1"></input> <input id="param2" placeholder="Param 2"></input> <input id="param3" placeholder="Param 3"></input>
+  <br/><br/><input id="param4" placeholder="Param 4"></input>
+  <input id="param5" placeholder="Param 5"></input> <input id="param6" placeholder="Param 6"></input>
+  <br/><br/><input id="param7" placeholder="Param 7"></input> <input id="param8" placeholder="Param 8"></input> <input id="param9" placeholder="Param 9"></input>
+  <br/><br/><input id="param10" placeholder="Param 10"></input> <input id="param11" placeholder="Param 11"></input> <input id="param12" placeholder="Param 12"></input>
   <br/><br/><img src="sqlTutorial.png">
   <br/><hr>
   <textarea placeholder="SQL Result" id="result" rows="8" cols="48"></textarea>
@@ -30,7 +30,9 @@ function input() {
     var param8 = document.getElementById("param8").value;
     var param9 = document.getElementById("param9").value;
     var param10 = document.getElementById("param10").value;
-	var paramList = new Array(param1,param2,param3,param4,param5,param6,param7,param8,param9,param10);
+    var param11 = document.getElementById("param11").value;
+    var param12 = document.getElementById("param12").value;
+	var paramList = new Array(param1,param2,param3,param4,param5,param6,param7,param8,param9,param10,param11,param12);
 	var sql = document.getElementById("sql").value;
 	var i = 0;
 	while (i < paramList.length) {
