@@ -1,9 +1,96 @@
 <!DOCTYPE html>
 <html>
+
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<style>
+* {box-sizing: border-box;}
+ul {list-style-type: none;}
+body {font-family: Verdana, sans-serif;}
+
+.month {
+  padding: 70px 25px;
+  width: 100%;
+  background: #1abc9c;
+  text-align: center;
+}
+
+.month ul {
+  margin: 0;
+  padding: 0;
+}
+
+.month ul li {
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+}
+
+.month .prev {
+  float: left;
+  padding-top: 10px;
+}
+
+.month .next {
+  float: right;
+  padding-top: 10px;
+}
+
+.weekdays {
+  margin: 0;
+  padding: 10px 0;
+  background-color: #ddd;
+}
+
+.weekdays li {
+  display: inline-block;
+  width: 13.6%;
+  color: #666;
+  text-align: center;
+}
+
+.days {
+  padding: 10px 0;
+  background: #eee;
+  margin: 0;
+}
+
+.days li {
+  list-style-type: none;
+  display: inline-block;
+  width: 13.6%;
+  text-align: center;
+  margin-bottom: 5px;
+  font-size:12px;
+  color: #777;
+}
+
+.days li .active {
+  padding: 5px;
+  background: #1abc9c;
+  color: white !important
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width:720px) {
+  .weekdays li, .days li {width: 13.1%;}
+}
+
+@media screen and (max-width: 420px) {
+  .weekdays li, .days li {width: 12.5%;}
+  .days li .active {padding: 2px;}
+}
+
+@media screen and (max-width: 290px) {
+  .weekdays li, .days li {width: 12.2%;}
+}
+</style>
+</head>
   <title id="date12"></title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
    <link href="style.css" rel="stylesheet">
-<body style="background-color:powderblue;" onload ="getWeekDay()">
+<body style="background-color:powderblue;" onload ="pickDate();">
 <div align="center">
 <img src="zero.jpg">
 <br/><br/>
@@ -26,9 +113,38 @@
   <button onclick = "openIpAddress();" align="center" class="btn btn-danger btn-lg">Find IP Address</button>
   <button onclick = "openServer();" align="center" class="btn btn-success btn-lg">Start Server</button>
 </div>
+<br/>
+<div style ="width:600px;margin: auto;">
+<ul class="weekdays">
+  <li>Thứ 2</li>
+  <li>Thứ 3</li>
+  <li>Thứ 4</li>
+  <li>Thứ 5</li>
+  <li>Thứ 6</li>
+  <li>Thứ 7</li>
+  <li>Chủ Nhật</li>
+</ul>
+
+<ul class="days" id= "days">
+</ul>
+</div>
+
 </body>
 <script>
 var myWindow;
+
+function pickDate() {
+    var d = new Date();
+	
+	var month = d.getUTCMonth() + 1;
+	var day = d.getUTCDate();
+	var year = d.getUTCFullYear();
+	var lastdate = new Date(year,month+1,0);
+	var i;
+	for(i = 1; i<= lastdate.getUTCDate() ;i++){
+	$('#days').append('<li>' + i + '</li>');
+	}
+}
 
 function getWeekDay() {
     var d = new Date();
