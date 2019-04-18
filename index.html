@@ -7,55 +7,38 @@
 * {box-sizing: border-box;}
 ul {list-style-type: none;}
 body {font-family: Verdana, sans-serif;}
-
 .month {
   padding: 70px 25px;
   width: 100%;
   background: #1abc9c;
   text-align: center;
 }
-
 .month ul {
   margin: 0;
   padding: 0;
 }
-
 .month ul li {
   color: white;
   font-size: 20px;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
-
-.month .prev {
-  float: left;
-  padding-top: 10px;
-}
-
-.month .next {
-  float: right;
-  padding-top: 10px;
-}
-
 .weekdays {
   margin: 0;
   padding: 10px 0;
   background-color: #ddd;
 }
-
 .weekdays li {
   display: inline-block;
   width: 13.6%;
   color: #666;
   text-align: center;
 }
-
 .days {
   padding: 10px 0;
   background: #eee;
   margin: 0;
 }
-
 .days li {
   list-style-type: none;
   display: inline-block;
@@ -65,23 +48,34 @@ body {font-family: Verdana, sans-serif;}
   font-size:12px;
   color: #777;
 }
-
-.days li .active {
+.days li .lam {
+  padding: 5px;
+  background: #51d6ff;
+  color: white !important
+}
+.days li .xanh {
   padding: 5px;
   background: #1abc9c;
   color: white !important
 }
-
+.days li .vang {
+  padding: 5px;
+  background: #d1b91f;
+  color: white !important
+}
+.days li .do {
+  padding: 5px;
+  background: #ef0404;
+  color: white !important
+}
 /* Add media queries for smaller screens */
 @media screen and (max-width:720px) {
   .weekdays li, .days li {width: 13.1%;}
 }
-
 @media screen and (max-width: 420px) {
   .weekdays li, .days li {width: 12.5%;}
   .days li .active {padding: 2px;}
 }
-
 @media screen and (max-width: 290px) {
   .weekdays li, .days li {width: 12.2%;}
 }
@@ -94,7 +88,6 @@ body {font-family: Verdana, sans-serif;}
 <div align="center">
 <img src="zero.jpg">
 <br/><br/>
-  <h3 id = "date"><h3>
   <button onclick = "openSkype();" align="center" class="btn btn-primary btn-lg">Skype</button>
   <button onclick = "openChat();" align="center" class="btn btn-danger btn-lg">ChatWork</button>
   <button onclick = "openMusic();" align="center" class="btn btn-danger btn-lg">Music</button>
@@ -135,22 +128,12 @@ var myWindow;
 
 function pickDate() {
     var d = new Date();
-	
+	var dx = new Date(2019, 3, 15);
 	var month = d.getUTCMonth() + 1;
 	var day = d.getUTCDate();
 	var year = d.getUTCFullYear();
+	var firstdate = new Date(d.getFullYear(), d.getMonth(), 1);
 	var lastdate = new Date(year,month+1,0);
-	var i;
-	for(i = 1; i<= lastdate.getUTCDate() ;i++){
-	$('#days').append('<li>' + i + '</li>');
-	}
-}
-
-function getWeekDay() {
-    var d = new Date();
-	var month = d.getUTCMonth() + 1;
-	var day = d.getUTCDate();
-	var year = d.getUTCFullYear();
     var weekday = new Array(7);
     weekday[0] = "Chủ nhật";
     weekday[1] = "Thứ 2";
@@ -159,9 +142,50 @@ function getWeekDay() {
     weekday[4] = "Thứ 5";
     weekday[5] = "Thứ 6";
     weekday[6] = "Thứ 7";
-
-    var n = weekday[d.getDay()];
-    document.getElementById("date").innerHTML = n + ": " + day + "/" + month;
+	var n = weekday[firstdate.getDay()];
+	if( n == "Thứ 3"){
+	$('#days').append('<li></li>');
+	}
+	if( n == "Thứ 4"){
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	}
+	if( n == "Thứ 5"){
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	}
+	if( n == "Thứ 6"){
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	}
+	if( n == "Thứ 7"){
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	}
+	if( n == "Chủ nhật"){
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	$('#days').append('<li></li>');
+	}
+	for(i = 1; i<= lastdate.getUTCDate() ;i++){
+		if(i== day){
+			$('#days').append('<li><span class = "lam">' + i + '</span></li>');
+		}else {
+			$('#days').append('<li>' + i + '</li>');
+		}
+	}
+}
+function diffDays(dateObj1, dateObj2) {
+   return dateObj2.getDate()-dateObj1.getDate()+1;
 }
 function openAddParram() {
     myWindow = window.open("inputParamSQL.html", "", "width=750, height=700");
