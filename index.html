@@ -1,203 +1,145 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<style>
-* {box-sizing: border-box;}
-ul {list-style-type: none;}
-body {font-family: Verdana, sans-serif;}
-.month {
-  padding: 70px 25px;
-  width: 100%;
-  background: #1abc9c;
-  text-align: center;
-}
-.month ul {
-  margin: 0;
-  padding: 0;
-}
-.month ul li {
-  color: white;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-.weekdays {
-  margin: 0;
-  padding: 10px 0;
-  background-color: #ddd;
-}
-.weekdays li {
-  display: inline-block;
-  width: 13.6%;
-  color: #666;
-  text-align: center;
-}
-.days {
-  padding: 10px 0;
-  background: #eee;
-  margin: 0;
-}
-.days li {
-  list-style-type: none;
-  display: inline-block;
-  width: 13.6%;
-  text-align: center;
-  margin-bottom: 5px;
-  font-size:12px;
-  color: #777;
-}
-.days li .lam {
-  padding: 5px;
-  background: #51d6ff;
-  color: white !important
-}
-.days li .xanh {
-  padding: 5px;
-  background: #1abc9c;
-  color: white !important
-}
-.days li .vang {
-  padding: 5px;
-  background: #d1b91f;
-  color: white !important
-}
-.days li .do {
-  padding: 5px;
-  background: #ef0404;
-  color: white !important
-}
-/* Add media queries for smaller screens */
-@media screen and (max-width:720px) {
-  .weekdays li, .days li {width: 13.1%;}
-}
-@media screen and (max-width: 420px) {
-  .weekdays li, .days li {width: 12.5%;}
-  .days li .active {padding: 2px;}
-}
-@media screen and (max-width: 290px) {
-  .weekdays li, .days li {width: 12.2%;}
-}
-#grad {
-  background-image: linear-gradient(#B7F8DB, #50A7C2);
-}
-</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="style.css" rel="stylesheet">
+  <style>
+    .weekdays {margin: 0;padding: 10px 0;background-color: #ddd;}
+    .weekdays li {display: inline-block;width: 13.6%;color: #666;text-align: center;}
+    .days {padding: 10px 0;background: #eee;margin: 0;}
+    .days li {list-style-type: none;display: inline-block;width: 13.6%;text-align: center;margin-bottom: 5px;font-size:12px;color: #777;}
+    .days li .lam {padding: 5px;background: #51d6ff;color: white !important}
+    .days li .xanh {padding: 5px;background: #1abc9c;color: white !important}
+    .days li .vang {padding: 5px;background: #d1b91f;color: white !important}
+    .days li .do {padding: 5px;background: #ef0404;color: white !important}
+    #grad {background-image: linear-gradient(#B7F8DB, #50A7C2);}
+  </style>
+  <script>
+    var myWindow;
+    function pickDate() {
+        var d = new Date();
+    	var dx = new Date(2019, 3, 15);
+    	var month = d.getUTCMonth() + 1;
+    	var day = d.getUTCDate();
+    	var year = d.getUTCFullYear();
+    	var firstdate = new Date(d.getFullYear(), d.getMonth(), 1);
+    	var lastdate = new Date(year,month+1,0);
+        var weekday = new Array(7);
+        weekday[0] = "Chủ nhật";
+        weekday[1] = "Thứ 2";
+        weekday[2] = "Thứ 3";
+        weekday[3] = "Thứ 4";
+        weekday[4] = "Thứ 5";
+        weekday[5] = "Thứ 6";
+        weekday[6] = "Thứ 7";
+    	var n = weekday[firstdate.getDay()];
+    	if( n == "Thứ 3"){
+    	$('#days').append('<li></li>');
+    	}
+    	if( n == "Thứ 4"){
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	}
+    	if( n == "Thứ 5"){
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	}
+    	if( n == "Thứ 6"){
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	}
+    	if( n == "Thứ 7"){
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	}
+    	if( n == "Chủ nhật"){
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	$('#days').append('<li></li>');
+    	}
+    	for(i = 1; i<= lastdate.getUTCDate() ;i++){
+    		if(i== day){
+    			$('#days').append('<li><span class = "lam">' + i + '</span></li>');
+    		}else {
+    			$('#days').append('<li>' + i + '</li>');
+    		}	
+			if (i == lastdate.getUTCDate()){
+			  var m = weekday[firstdate.getDay()];
+   	          if( m == "Thứ 2"){
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      }
+    	      if( m == "Thứ 3"){
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      }
+    	      if( m == "Thứ 4"){
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      }
+    	      if( m == "Thứ 5"){
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      }
+    	      if( m == "Thứ 6"){
+    	      $('#days').append('<li></li>');
+    	      $('#days').append('<li></li>');
+    	      }
+    	      if( m == "Thứ 7"){
+    	      $('#days').append('<li></li>');
+    	      }
+			}
+    	}
+    }
+    function diffDays(dateObj1, dateObj2) {return dateObj2.getDate()-dateObj1.getDate()+1;}
+    function openAddParram() {myWindow = window.open("inputParamSQL.html", "", "width=750, height=700");}
+    function openYoutube() {myWindow = window.open("http://youtube.com/", "", "width=500, height=300");}
+    function openDto() {myWindow = window.open("createDto.html");}
+    function openSQL() {myWindow = window.open("formatSQL.html", "", "width=480, height=670");}
+    function openCasualWorld() {myWindow = window.open("https://casualworld.herokuapp.com/");}
+    function openDemo() {myWindow = window.open("https://vuforiaunity.herokuapp.com/");}
+  </script>
 </head>
-<link rel="icon" href="favicon.ico">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link href="style.css" rel="stylesheet">
-<body id = "grad" onload ="pickDate();">
-<div align="center">
-<img src="zero.jpg">
-<br/><br/>
-  <button onclick = "openCasualWorld();" align="center" class="btn btn-primary btn-lg">Casual World</button>
-  <button onclick = "openDemo();" align="center" class="btn btn-primary btn-lg">AR Website</button>
-  <br/><hr>
-  <button onclick = "openYoutube();" align="center" class="btn btn-danger btn-lg">Youtube</button>
-  <button onclick = "openDto();" align="center" class="btn btn-danger btn-lg">Create DTO, DAO</button>
-  <br/><hr>
-  <button onclick = "openAddParram();" align="center" class="btn btn-success btn-lg">Input Param</button>
-  <button onclick = "openSQL();" align="center" class="btn btn-success btn-lg">FormatSQL</button>
-  <br/><hr>
-</div>
-<br/>
-<div style ="width:600px;margin: auto;">
-<ul class="weekdays">
-  <li>Thứ 2</li>
-  <li>Thứ 3</li>
-  <li>Thứ 4</li>
-  <li>Thứ 5</li>
-  <li>Thứ 6</li>
-  <li>Thứ 7</li>
-  <li>Chủ Nhật</li>
-</ul>
-
-<ul class="days" id= "days">
-</ul>
-</div>
-
+<br/><hr>
+<body align="center" style ="width:900px;margin: auto" onload ="pickDate();">
+  <div id = "grad" align="center">
+    <img src="zero.jpg">
+    <br/><br/>
+      <button onclick = "openCasualWorld();" align="center" class="btn btn-primary btn-lg">Casual World</button>
+      <button onclick = "openDemo();" align="center" class="btn btn-primary btn-lg">AR Website</button>
+      <br/><hr>
+      <button onclick = "openYoutube();" align="center" class="btn btn-danger btn-lg">Youtube</button>
+      <button onclick = "openDto();" align="center" class="btn btn-danger btn-lg">Create DTO, DAO</button>
+      <br/><hr>
+      <button onclick = "openAddParram();" align="center" class="btn btn-success btn-lg">Input Param</button>
+      <button onclick = "openSQL();" align="center" class="btn btn-success btn-lg">FormatSQL</button>
+      <br/><hr>
+      <div style ="width:600px;">
+        <ul class="weekdays"><li>Thứ 2</li><li>Thứ 3</li><li>Thứ 4</li><li>Thứ 5</li><li>Thứ 6</li><li>Thứ 7</li><li>Chủ Nhật</li></ul>
+        <ul class="days" id= "days"></ul>
+      </div>
+  </div>
 </body>
-<script>
-var myWindow;
-
-function pickDate() {
-    var d = new Date();
-	var dx = new Date(2019, 3, 15);
-	var month = d.getUTCMonth() + 1;
-	var day = d.getUTCDate();
-	var year = d.getUTCFullYear();
-	var firstdate = new Date(d.getFullYear(), d.getMonth(), 1);
-	var lastdate = new Date(year,month+1,0);
-    var weekday = new Array(7);
-    weekday[0] = "Chủ nhật";
-    weekday[1] = "Thứ 2";
-    weekday[2] = "Thứ 3";
-    weekday[3] = "Thứ 4";
-    weekday[4] = "Thứ 5";
-    weekday[5] = "Thứ 6";
-    weekday[6] = "Thứ 7";
-	var n = weekday[firstdate.getDay()];
-	if( n == "Thứ 3"){
-	$('#days').append('<li></li>');
-	}
-	if( n == "Thứ 4"){
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	}
-	if( n == "Thứ 5"){
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	}
-	if( n == "Thứ 6"){
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	}
-	if( n == "Thứ 7"){
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	}
-	if( n == "Chủ nhật"){
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	$('#days').append('<li></li>');
-	}
-	for(i = 1; i<= lastdate.getUTCDate() ;i++){
-		if(i== day){
-			$('#days').append('<li><span class = "lam">' + i + '</span></li>');
-		}else {
-			$('#days').append('<li>' + i + '</li>');
-		}
-	}
-}
-function diffDays(dateObj1, dateObj2) {
-   return dateObj2.getDate()-dateObj1.getDate()+1;
-}
-function openAddParram() {
-    myWindow = window.open("inputParamSQL.html", "", "width=750, height=700");
-}
-function openYoutube() {
-    myWindow = window.open("http://youtube.com/", "", "width=500, height=300");
-}
-function openDto() {
-    myWindow = window.open("createDto.html");
-}
-function openSQL() {
-    myWindow = window.open("formatSQL.html", "", "width=480, height=670");
-}
-function openCasualWorld() {
-    myWindow = window.open("https://casualworld.herokuapp.com/");
-}
-function openDemo() {
-    myWindow = window.open("https://vuforiaunity.herokuapp.com/");
-}
-</script>
+<hr><br/>
 </html>
