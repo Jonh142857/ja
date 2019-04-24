@@ -87,23 +87,15 @@ body {font-family: Verdana, sans-serif;}
 <div align="center">
 <img src="zero.jpg">
 <br/><br/>
-  <button onclick = "openSkype();" align="center" class="btn btn-primary btn-lg">Skype</button>
-  <button onclick = "openChat();" align="center" class="btn btn-danger btn-lg">ChatWork</button>
-  <button onclick = "openMusic();" align="center" class="btn btn-danger btn-lg">Music</button>
-  <button onclick = "openCasualWorld();" align="center" class="btn btn-danger btn-lg">Casual World</button>
+  <button onclick = "openCasualWorld();" align="center" class="btn btn-primary btn-lg">Casual World</button>
   <button onclick = "openDemo();" align="center" class="btn btn-primary btn-lg">AR Website</button>
   <br/><hr>
-  <button onclick = "openGoogle();" align="center" class="btn btn-danger btn-lg">Google</button>
-  <button onclick = "openVeBay();" align="center" class="btn btn-danger btn-lg">Vẽ Bậy</button>
-  <button onclick = "openHira();" align="center" class="btn btn-danger btn-lg">Hira</button>
-  <button onclick = "openKata();" align="center" class="btn btn-danger btn-lg">Kata</button>
+  <button onclick = "openYoutube();" align="center" class="btn btn-danger btn-lg">Youtube</button>
   <button onclick = "openDto();" align="center" class="btn btn-danger btn-lg">Create DTO, DAO</button>
   <br/><hr>
   <button onclick = "openAddParram();" align="center" class="btn btn-success btn-lg">Input Param</button>
-  <button onclick = "openSQL();" align="center" class="btn btn-danger btn-lg">FormatSQL</button>
-  <button onclick = "openTable();" align="center" class="btn btn-danger btn-lg">Create Table</button>
-  <button onclick = "openIpAddress();" align="center" class="btn btn-danger btn-lg">Find IP Address</button>
-  <button onclick = "openServer();" align="center" class="btn btn-success btn-lg">Start Server</button>
+  <button onclick = "openSQL();" align="center" class="btn btn-success btn-lg">FormatSQL</button>
+  <br/><hr>
 </div>
 <br/>
 <div style ="width:600px;margin: auto;">
@@ -189,32 +181,11 @@ function diffDays(dateObj1, dateObj2) {
 function openAddParram() {
     myWindow = window.open("inputParamSQL.html", "", "width=750, height=700");
 }
-function openHira() {
-    myWindow = window.open("hira.html", "", "width=300, height=450");
-}
-function openGoogle() {
-    myWindow = window.open("http://google.com.vn/", "", "width=300, height=300");
-}
-function openKata() {
-    myWindow = window.open("kata.html", "", "width=300, height=450");
+function openYoutube() {
+    myWindow = window.open("http://youtube.com/", "", "width=500, height=300");
 }
 function openDto() {
     myWindow = window.open("createDto.html");
-}
-function openMusic() {
-    myWindow = window.open("http://mp3.zing.vn/", "", "width=350, height=300");
-}
-function openSkype() {
-    myWindow = window.open("https://web.skype.com/en/", "", "width=580, height=550");
-}
-function openFb() {
-    myWindow = window.open("http://m.facebook.com/messages/read/?tid=cid.c.100009135930251%3A100023633589931", "", "width=300, height=300");
-}
-function openVeBay() {
-    myWindow = window.open("http://m.facebook.com/vebay69", "", "width=300, height=300");
-}
-function openChat() {
-    myWindow = window.open("https://www.chatwork.com/#!rid59385706", "", "width=580, height=550");
 }
 function openSQL() {
     myWindow = window.open("formatSQL.html", "", "width=480, height=670");
@@ -224,15 +195,6 @@ function openCasualWorld() {
 }
 function openDemo() {
     myWindow = window.open("https://vuforiaunity.herokuapp.com/");
-}
-function openTable() {
-    myWindow = window.open("createTable.html");
-}
-function openIpAddress() {
-    myWindow = window.open("findAddress.html", "", "width=300, height=100");
-}
-function openServer() {
-    myWindow = window.open("server.html", "", "width=350, height=300");
 }
 </script>
 </html>
