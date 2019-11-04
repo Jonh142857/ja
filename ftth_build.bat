@@ -9,7 +9,9 @@
 @REM 現在Eclipseから実行しているSubversion(SVN)作業コピーの更新～ビルドまでをバッチファイル化する。
 @REM --------------------------------------------------------
 
-@ECHO off
+@IF EXIST ftth_build_powershell.ps1 DEL /F ftth_build_powershell.ps1
+@IF EXIST winMergeU.bat DEL /F winMergeU.bat
+@ECHO OFF
 (
 
 @REM 現在の位置を取得する。
@@ -17,10 +19,28 @@
 @ECHO $dir = $dir.ToString(^)
 @ECHO $nowdate = Get-Date -format "yyyyMMdd"
 
-@REM 本番機・品証機を取得する。
+@REM 起動設定ファイル
 @ECHO $ftthStartup = "C:\ftth\conf\ftth_startup.conf"
+@ECHO if (-Not (test-path $ftthStartup^)^){
+@ECHO     throw "C:\ftth\conf\ftth_startup.conf が存在しません。"
+@ECHO }
+@REM 環境設定ファイル
+@ECHO $ftthDeploy = "C:\ftth\conf\ftth_deploy.conf"
+@ECHO if (-Not (test-path $ftthDeploy^)^){
+@ECHO     throw "C:\ftth\conf\ftth_deploy.conf が存在しません。"
+@ECHO }
+@REM 開発資産一覧.xlsx
+@ECHO $kaihatsuShisanList = "C:\ftth\list\"+$nowdate+"\開発資産一覧.xlsx"
+@ECHO if (-Not (test-path $kaihatsuShisanList^)^){
+@ECHO     throw "開発資産一覧.xlsx が存在しません。"
+@ECHO }
+
+@REM 本番機・品証機を取得する。
 @ECHO $ftthStartupData = Get-Content $ftthStartup -Encoding UTF8
-@ECHO $locationType = $ftthStartupData.Get(0^)
+@ECHO foreach ($line in $ftthStartupData^) {
+@ECHO     $locationType = $line
+@ECHO     break
+@ECHO }
 
 @REM --------------------------------------------------------
 @REM 本番機
@@ -31,7 +51,6 @@
 @REM 開発資産一覧の種類が「Java」のものについて記載されているフォルダ名に対応する本番SVNの作業コピーを更新する
 @REM --------------------------------------------------------
 @REM 開発資産一覧.xlsxからフォルダ一覧を取得する。
-@ECHO     $kaihatsuShisanList = "C:\ftth\list\"+$nowdate+"\開発資産一覧.xlsx"
 @ECHO     $folderNm = New-Object System.Collections.Generic.List[System.Object]
 @ECHO     $xl = New-Object -ComObject Excel.Application
 @ECHO     $xl.Visible = $false
@@ -55,14 +74,13 @@
 @ECHO             java -cp "C:\ftth\workspace\ZzSvnUpdateSearcher\jsvn\lib\*" org.tmatesoft.svn.cli.SVN cleanup C:\ftth\workspace\$svn
 @ECHO             java -cp "C:\ftth\workspace\ZzSvnUpdateSearcher\jsvn\lib\*" org.tmatesoft.svn.cli.SVN update C:\ftth\workspace\$svn
 @ECHO         } else {
-@ECHO             throw "C:\ftth\workspace\"+$svn+" does not exist"
+@ECHO             throw "C:\ftth\workspace\"+$svn+" が存在しません。"
 @ECHO         }
 @ECHO     }
 
 @REM --------------------------------------------------------
 @REM buid.xmlを使ってAntでビルドを実行
 @REM --------------------------------------------------------
-@ECHO     $ftthDeploy = "C:\ftth\conf\ftth_deploy.conf"
 @ECHO     $ftthDeployData = Get-Content $ftthDeploy -Encoding UTF8
 @ECHO     foreach ($line in $ftthDeployData^)
 @ECHO     {
@@ -83,7 +101,6 @@
 @REM 開発資産一覧の種類が「Java」のものについて記載されているフォルダ名に対応する本番SVNの作業コピーを更新する
 @REM --------------------------------------------------------
 @REM 開発資産一覧.xlsxからフォルダ一覧を取得する。
-@ECHO     $kaihatsuShisanList = "C:\ftth\list\"+$nowdate+"\開発資産一覧.xlsx"
 @ECHO     $folderNm = New-Object System.Collections.Generic.List[System.Object]
 @ECHO     $xl = New-Object -ComObject Excel.Application
 @ECHO     $xl.Visible = $false
@@ -107,7 +124,7 @@
 @ECHO             java -cp "C:\ftth\workspace\ZzSvnUpdateSearcher\jsvn\lib\*" org.tmatesoft.svn.cli.SVN cleanup C:\ftth\workspace\$svn
 @ECHO             java -cp "C:\ftth\workspace\ZzSvnUpdateSearcher\jsvn\lib\*" org.tmatesoft.svn.cli.SVN update C:\ftth\workspace\$svn
 @ECHO         } else {
-@ECHO             throw "C:\ftth\workspace\"+$svn+" does not exist"
+@ECHO             throw "C:\ftth\workspace\"+$svn+" が存在しません。"
 @ECHO         }
 @ECHO     }
 
@@ -199,12 +216,11 @@
 @ECHO         start $dir\winMergeU.bat -windowstyle hidden
 
 @REM 抽出されたソースコードと本番SVNのソースコードのdiffを取得
-@ECHO         write-host "抽出されたソースコードと本番SVNのソースコードのdiffを取得する。ソースコードのDiffを参照のこと"
+@ECHO         write-host "抽出されたソースコードと本番SVNのソースコードに差異があります。ソースコードのDiffをご確認ください。"
 
 @REM --------------------------------------------------------
 @REM 抽出されたソースコードをワークスペースにコピーする。
 @REM --------------------------------------------------------
-@ECHO         $ftthDeploy = "C:\ftth\conf\ftth_deploy.conf"
 @ECHO         $dt = Get-Content $ftthDeploy -Encoding UTF8
 @ECHO         $buildList = New-Object System.Collections.Generic.List[System.Object]
 @ECHO         foreach ($line in $dt^)
@@ -237,12 +253,12 @@
 @ECHO         }
 
 @REM 不一致であればチェック結果に差分を出して異常終了させる
-@ECHO     write-host "開発資産一覧.xlsx とログファイルが異なる。チェック結果を参照のこと"
+@ECHO     write-host "開発資産一覧.xlsx とログファイルに差異があります。チェック結果をご確認ください。"
 @ECHO     }
 @ECHO }
 @ECHO Remove-Item ftth_build_powershell.ps1
 )>>ftth_build_powershell.ps1
-@ECHO on
+@ECHO ON
 
 PowerShell.exe -ExecutionPolicy UnRestricted -File ftth_build_powershell.ps1
-@pause
+@PAUSE
